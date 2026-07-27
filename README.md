@@ -170,6 +170,6 @@ trained on biased data can achieve perfect in-distribution accuracy
 while completely failing when the shortcut is reversed. The code used to
 generate the dataset and run the CNN experiments is available at:
 
-::: center
+
 <https://github.com/TimH149/Controlled_Experiment>
-:::
+
