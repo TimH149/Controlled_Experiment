@@ -83,39 +83,19 @@ The dataset contains multiple splits, shown in
 Table [\[tab:splits\]](#tab:splits){reference-type="ref"
 reference="tab:splits"}.
 
-::: tabularx
-@ L2.6cm Y Y L2.8cm @ **Split** & **Description** & **Purpose** &
-**Example**\
+## Dataset Splits
 
-`train_biased` & Tennis balls are yellow-green, balloons are red &
-Creates a color-label shortcut &
-![image](./figures/train_biased/image12.png){width="1.25cm"}
-![image](./figures/train_biased/image4.png){width="1.25cm"}\
-`train_balanced` & Both classes appear in both colors & Control: can the
-model learn object structure? &
-![image](./figures/train_balanced/image14.png){width="1.25cm"}
-![image](./figures/train_balanced/image9.png){width="1.25cm"}\
-`train_colored` & Objects appear with diverse colors during training &
-Control: can the model ignore color when color varies? &
-![image](./figures/train_colored/image13.png){width="1.25cm"}
-![image](./figures/train_colored/image5.png){width="1.25cm"}\
-`val_biased` & Same color-label relation as biased train set & Biased
-validation set for biased training &
-![image](./figures/val_biased/image6.png){width="1.25cm"}
-![image](./figures/val_biased/image10.png){width="1.25cm"}\
-`test_biased` & Same color-label relation as training & Tests
-in-distribution performance &
-![image](./figures/test_biased/image8.png){width="1.25cm"}
-![image](./figures/test_biased/image2.png){width="1.25cm"}\
-`test_balanced` & Both classes appear in both colors & Tests whether
-color is necessary &
-![image](./figures/test_balanced/image1.png){width="1.25cm"}
-![image](./figures/test_balanced/image7.png){width="1.25cm"}\
-`test_reversed` & Tennis balls are red, balloons are yellow-green &
-Tests shortcut failure &
-![image](./figures/test_reversed/image3.png){width="1.25cm"}
-![image](./figures/test_reversed/image11.png){width="1.25cm"}\
-:::
+The dataset contains multiple splits designed to test whether a CNN learns object structure or relies on color as a shortcut.
+
+| Split | Description | Purpose | Examples |
+|---|---|---|---|
+| `train_biased` | Tennis balls are yellow-green, balloons are red | Creates a color-label shortcut | ![](./figures/train_biased/image12.png) ![](./figures/train_biased/image4.png) |
+| `train_balanced` | Both classes appear in both colors | Tests whether the model can learn object structure | ![](./figures/train_balanced/image14.png) ![](./figures/train_balanced/image9.png) |
+| `train_colored` | Objects appear with diverse colors during training | Tests whether the model can ignore color variation | ![](./figures/train_colored/image13.png) ![](./figures/train_colored/image5.png) |
+| `val_biased` | Same color-label relation as biased training data | Validation set for biased training | ![](./figures/val_biased/image6.png) ![](./figures/val_biased/image10.png) |
+| `test_biased` | Same color-label relation as training | Tests in-distribution performance | ![](./figures/test_biased/image8.png) ![](./figures/test_biased/image2.png) |
+| `test_balanced` | Both classes appear in both colors | Tests whether color is necessary | ![](./figures/test_balanced/image1.png) ![](./figures/test_balanced/image7.png) |
+| `test_reversed` | Tennis balls are red, balloons are yellow-green | Tests shortcut failure | ![](./figures/test_reversed/image3.png) ![](./figures/test_reversed/image11.png) | 
 
 The `test_reversed` split is the most significant split. The color-label
 relationship is reversed, but the label rule is unchanged. As a result,
@@ -158,16 +138,11 @@ Each trained model was evaluated on three test sets:
 The results are shown in Table [1](#tab:results){reference-type="ref"
 reference="tab:results"}.
 
-::: {#tab:results}
-  **Training Split**    **`test_biased`**   **`test_balanced`**   **`test_reversed`**
-  -------------------- ------------------- --------------------- ---------------------
-  `train_biased`              1.000                0.497                 0.000
-  `train_balanced`            1.000                1.000                 1.000
-  `train_colored`             1.000                1.000                 1.000
-
-  : Accuracy of CNN models trained on different dataset splits and
-  evaluated under different color-label relations.
-:::
+| Training Split | `test_biased` | `test_balanced` | `test_reversed` |
+|---|---:|---:|---:|
+| `train_biased` | 1.000 | 0.497 | 0.000 |
+| `train_balanced` | 1.000 | 1.000 | 1.000 |
+| `train_colored` | 1.000 | 1.000 | 1.000 |
 
 The model trained on `train_biased` achieves $100\%$ accuracy when the
 shortcut is still valid, as shown by its performance on `test_biased`.
